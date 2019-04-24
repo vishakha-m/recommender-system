@@ -4,7 +4,7 @@ import  re
 file = open('dataset.json','r')
 sample = json.loads(file.readline().rstrip())
 del sample['reviewTime']
-fieldnames=list(json.loads(file.readline().rstrip()).keys())  
+fieldnames=list(sample.keys())  
 out = csv.DictWriter(open('reviews.csv','w'),fieldnames)
 file = open('dataele.json','r')
 out.writeheader()
