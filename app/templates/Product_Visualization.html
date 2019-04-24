@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<body>
+
+
+<div id="piechart" style="float : left;"></div>
+
+<div id="piechart1" style="float : left;"></div>
+
+<script src="https://code.jquery.com/jquery-3.4.0.min.js"
+    integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script type="text/javascript">
+
+var name=localStorage.getItem("firstname");
+console.log(name);
+
+
+$.ajax({
+    type:'POST',
+    url:'/Ratingstat',
+    contentType:'application/json',
+    dataType:'json',
+    data: JSON.stringify({
+        id:name
+    }),
+    success: function(response) {
+        
+        var a = JSON.stringify(response.data[0].count);
+        console.log("first");
+        /*$('#prodname2').text(JSON.stringify(response.data[1].count));
+        $('#prodname3').text(JSON.stringify(response.data[2].count));
+        $('#prodname4').text(JSON.stringify(response.data[3].count));
+        $('#prodname5').text(JSON.stringify(response.data[4].count));*/
+
+        
+
+        console.log('Hello reached');
+      
+       
+    },
+    error: function() {
+        console.log("Critical Error");
+    }
+})
+// Load google charts
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+// Draw the chart and set the chart values
+function drawChart() {
+  var data = google.visualization.arrayToDataTable([
+  ['Rating', 'Number Of Users'],
+  ['1 Star', 20],
+  ['2 Star', 2],
+  ['3 Star', 10],
+  ['4 Star', 2],
+  ['5 Star', 8]
+]);
+
+var data1 = google.visualization.arrayToDataTable([
+  ['Total Number Of Users', 'Number Of Users Bought Product'],
+  ['1 Star', 8],
+  ['2 Star', 2],
+
+]);
+
+  // Optional; add a title and set the width and height of the chart
+  var options = {'title':'Product Rating Statistics', 'width':550, 'height':400};
+
+  var options1 = {'title':'Product Salse Statistics', 'width':550, 'height':400};
+
+
+  // Display the chart inside the <div> element with id="piechart"
+  var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+  chart.draw(data, options);
+
+  var chart = new google.visualization.PieChart(document.getElementById('piechart1'));
+  chart.draw(data1, options1);
+
+}
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,134 @@
+<html>
+<head>
+        <script src="https://code.jquery.com/jquery-3.4.0.min.js"
+        integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
+
+        <script>
+                $(document).ready(function() {
+
+                    var name=localStorage.getItem("firstname");
+                    console.log(name);
+  localStorage.clear();
+    localStorage.removeItem("firstname");
+  //alert(name);
+ 
+$.ajax({
+    type:'POST',
+    url:'/Ratingstat',
+    contentType:'application/json',
+    dataType:'json',
+    data: JSON.stringify({
+        id:name
+    }),
+    success: function(response) {
+        var data1=[];
+        var stars=[];
+        var total=0;
+        for (let i = 0; i < response.data.length; i++) {
+            data1.push(response.data[i].count);
+            total+=parseInt(response.data[i].count);
+            stars.push(response.data[i].score+" Star");
+            
+        }
+        //data1.push(response.data[i].count)
+        
+       /* console.log($('#prodname1').text(JSON.stringify(response.data[0].count)));
+        $('#prodname2').text(JSON.stringify(response.data[1].count));
+        $('#prodname3').text(JSON.stringify(response.data[2].count));
+        $('#prodname4').text(JSON.stringify(response.data[3].count));
+        $('#prodname5').text(JSON.stringify(response.data[4].count));
+*/      console.log(data1);
+        renderChart(data1,stars);
+        renderChart1(total);
+
+        console.log($('#prodname1').text());
+      
+       
+    },
+    error: function() {
+        console.log("Critical Error");
+    }
+})
+
+
+    function renderChart(data1,stars){
+                    data = {
+        datasets: [{
+            data: data1,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)'
+                   
+                ],
+                borderColor: [
+                    'rgba(0, 0, 0, 1)',
+                    'rgba(0, 0, 0, 1)',
+                    'rgba(0, 0, 0, 1)',
+                    'rgba(0, 0, 0, 1)',
+                    'rgba(0, 0, 0, 1)'
+                    
+                ],
+                borderWidth: 1
+        }],
+    
+        // These labels appear in the legend and in the tooltips when hovering different arcs
+        labels: stars
+    };
+                    var ctx = document.getElementById('myChart').getContext('2d');
+                    var myChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: data,
+        options: {
+                responsive: false
+            }
+        //options: options
+    });}
+
+    function renderChart1(total){
+                    data = {
+        datasets: [{
+            data: [total,1000],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)'
+                   
+                ],
+                borderColor: [
+                    'rgba(0, 0, 0, 1)',
+                    'rgba(0, 0, 0, 1)'
+                    
+                ],
+                borderWidth: 1
+        }],
+    
+        // These labels appear in the legend and in the tooltips when hovering different arcs
+        labels: ['Number of Users','Total Number Of Users']
+    };
+                    var ctx = document.getElementById('myChart1').getContext('2d');
+                    var myChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: data,
+        options: {
+                responsive: false
+            }
+        //options: options
+    });}
+                 }); </script>
+</head>
+
+<body>
+
+
+        <div id="piechart" style="float : left;">
+        <canvas id="myChart" width="400px" height="400px"></canvas>
+        </div>
+
+        <div id="piechart1" style="float : left;">
+                <canvas id="myChart1" width="400px" height="400px"></canvas>
+        </div>
+</body>
+</html>

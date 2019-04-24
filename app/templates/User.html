@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Section 2: JavaScript Language Basics</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    </head>
+
+    <script src="https://code.jquery.com/jquery-3.4.0.min.js"
+    integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+<script>
+   $(document).ready(function() {
+
+  var name=localStorage.getItem("firstname");
+  localStorage.clear();
+    localStorage.removeItem("firstname");
+  //alert(name);
+  console.log(name);
+$.ajax({
+    type:'POST',
+    url:'/Recommend',
+    contentType:'application/json',
+    dataType:'json',
+    data: JSON.stringify({
+        id:name,
+        limit:10
+    }),
+    success: function(response) {
+        
+        $('#prodname1').text(JSON.stringify(response.data[0].product_id));
+        $('#prodname2').text(JSON.stringify(response.data[1].product_id));
+        $('#prodname3').text(JSON.stringify(response.data[2].product_id));
+        $('#prodname4').text(JSON.stringify(response.data[3].product_id));
+        $('#prodname5').text(JSON.stringify(response.data[4].product_id));
+
+        $('#score1').text(JSON.stringify(response.data[0].predection_score));
+        $('#score2').text(JSON.stringify(response.data[1].predection_score));
+        $('#score3').text(JSON.stringify(response.data[2].predection_score));
+        $('#score4').text(JSON.stringify(response.data[3].predection_score));
+        $('#score5').text(JSON.stringify(response.data[4].predection_score));
+
+
+        document.getElementById('image1').src = "http://images.amazon.com/images/P/"+response.data[0].product_id+".LZZZZZZZ.jpg";
+        document.getElementById('image2').src = "http://images.amazon.com/images/P/"+response.data[1].product_id+".LZZZZZZZ.jpg";
+        document.getElementById('image3').src = "http://images.amazon.com/images/P/"+response.data[2].product_id+".LZZZZZZZ.jpg";
+        document.getElementById('image4').src = "http://images.amazon.com/images/P/"+response.data[3].product_id+".LZZZZZZZ.jpg";
+        document.getElementById('image5').src = "http://images.amazon.com/images/P/"+response.data[4].product_id+".LZZZZZZZ.jpg";
+
+        $('#view1').click(function () {
+          console.log(response.data[0].product_id);
+          var al = $("#prodname1").text(); 
+        var b =al.replace(/['"]+/g,'');
+        localStorage.setItem("firstname",b);
+         });
+
+         $('#view2').click(function () {
+          var al = $("#prodname2").text(); 
+        var b =al.replace(/['"]+/g,'');
+        localStorage.setItem("firstname",b);
+         });
+
+         $('#view3').click(function () {
+          var al = $("#prodname3").text(); 
+        var b =al.replace(/['"]+/g,'');
+        localStorage.setItem("firstname",b);
+         });
+
+         $('#view4').click(function () {
+          var al = $("#prodname4").text(); 
+        var b =al.replace(/['"]+/g,'');
+        localStorage.setItem("firstname",b);
+         });
+
+         $('#view5').click(function () {
+          var al = $("#prodname5").text(); 
+        var b =al.replace(/['"]+/g,'');
+        localStorage.setItem("firstname",b);
+         });
+
+        console.log($('#prodname1').text());
+      productlist = document.getElementById("product1");
+      productlist.innerHTML+= "<div class='row featurette'><div class='col-md-7'><h2 class='featurette-heading'>Product 1 : <span class='text-muted' id='prodname1'>"+response.data[0].product_id+"</span></h2><p class='lead'>This product is very good and i have been using it from years and it is been comfort and and good product to use.</p><form action='/forward2/' method='POST'><button name='forwardBtn' type='submit'  id='view1'>View Details</button></form></div><div class='col-md-5'><img class='featurette-image img-responsive center-block' src='http://images.amazon.com/images/P/" +response.data[0].product_id+".01.LZZZZZZZ.jpg' alt='Generic placeholder image' style='width: 285px; border-radius=50%;'></div></div>";
+       
+       //product = document.getElementById("product1");
+      // product.innerHTML += "<div class='row featurette'><div class='col-md-7'><h2 class='featurette-heading'>Product 1 : <span class='text-muted'><span id='prodname1'></span></h2><p class='lead'>This product is very good and i have been using it from years and it is been comfort and and good product to use.</p><form action='/forward2/' method='POST'><button name='forwardBtn' type='submit'  id='view1'>View Details</button></form></div><div class='col-md-5'><img class='featurette-image img-responsive center-block' src='http://images.amazon.com/images/P/"+response.data[0].product_id+".01.LZZZZZZZ.jpg' alt='Generic placeholder image' style='width: 285px; border-radius:50%;'></div></div>";
+    },
+    error: function() {
+        console.log("Critical Error");
+    }
+})
+    
+         
+
+   });
+</script>
+
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Recommender System</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="#">Features</a>
+      <a class="nav-item nav-link" href="#">Pricing</a>
+      <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+    </div>
+  </div>
+    <form class="form-inline">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
+</nav>
+        
+         <hr class="featurette-divider">
+         <div class="row featurette">
+            <div class="col-md-7">
+              <h2 class="featurette-heading">Product 1 : <span class="text-muted"><span id="prodname1"></span></h2>
+              <p class="lead" >About Product Description.</p>
+              <h3><strong>Predection Value :</strong><span class="lead" id="score1"></span></h3>
+              <form action="/forward2/" method="post">
+                <button name="forwardBtn" type="submit" id="view1">View Details</button>
+            </form>
+            </div>
+            <div class="col-md-5">
+              <img id = "image1" class="featurette-image img-responsive center-block" src="" alt="Generic placeholder image" style="width: 285px; border-radius=50%;">
+            </div>
+          </div>
+  
+
+  <hr class="featurette-divider">
+
+  <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading">Product 2 : <span class="text-muted"><span id="prodname2"></span></h2>
+          <p class="lead" >About Product Description.</p>
+          <h3><strong>Predection Value :</strong><span class="lead" id="score2"></span></h3>
+          <form action="/forward2/" method="post">
+            <button name="forwardBtn" type="submit" id="view2">View Details</button>
+        </form>
+        </div>
+        <div class="col-md-5">
+          <img id="image2" class="featurette-image img-responsive center-block" src="" alt="Generic placeholder image" style="width: 285px; border-radius=50%;">
+        </div>
+      </div>
+
+  <hr class="featurette-divider">
+
+  <div class="row featurette">
+    <div class="col-md-7">
+      <h2 class="featurette-heading">Product 3 :<span class="text-muted" id="prodname3"></span></h2>
+      <p class="lead" >About Product Description.</p>
+      <h3><strong>Predection Value :</strong><span class="lead" id="score3"></span></h3>
+      <form action="/forward2/" method="post">
+        <button name="forwardBtn" type="submit" id="view3">View Details</button>
+    </form>
+    </div>
+    <div class="col-md-5">
+      <img id="image3" class="featurette-image img-responsive center-block" src="" alt="Generic placeholder image" style="width: 285px; border-radius: 50%;">
+    </div>
+  </div>
+
+  <hr class="featurette-divider">
+        
+         <hr class="featurette-divider">
+
+  <div class="row featurette">
+    <div class="col-md-7">
+      <h2 class="featurette-heading">Product 4 :<span class="text-muted" id="prodname4"></span></h2>
+      <p class="lead" >About Product Description.</p>
+      <h3><strong>Predection Value :</strong><span class="lead" id="score4"></span></h3>
+      <form action="/forward2/" method="post">
+        <button name="forwardBtn" type="submit" id="view4">View Details</button>
+    </form>
+    </div>
+    <div class="col-md-5">
+      <img id="image4" class="featurette-image img-responsive center-block" src="" alt="Generic placeholder image" style="width: 285px; border-radius: 50%;">
+    </div>
+  </div>
+
+  <hr class="featurette-divider">
+        
+         <hr class="featurette-divider">
+
+  <div class="row featurette">
+    <div class="col-md-7">
+      <h2 class="featurette-heading">Product 5 :<span class="text-muted" id="prodname5"></span></h2>
+      <p class="lead" >About Product Description.</p>
+      <h3><strong>Predection Value :</strong><span class="lead" id="score5"></span></h3>
+      <form action="/forward2/" method="post">
+        <button name="forwardBtn" type="submit" id="view5">View Details</button>
+    </form>
+    </div>
+    <div class="col-md-5">
+      <img id="image5" class="featurette-image img-responsive center-block" src="" alt="Generic placeholder image" style="width: 285px;border-radius: 50%">
+    </div>
+  </div>
+
+  <hr class="featurette-divider">
+    </body>
+
+</html>

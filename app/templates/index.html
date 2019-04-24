@@ -1,0 +1,31 @@
+<html>
+
+<head>
+    <title>Index</title>
+</head>
+
+<body>
+    <div id="results"></div>
+</body>
+<script src="https://code.jquery.com/jquery-3.4.0.min.js"
+    integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+<script>
+$.ajax({
+    type:'POST',
+    url:'/Recommend',
+    contentType:'application/json',
+    dataType:'json',
+    data: JSON.stringify({
+        id:"ARQQ97F68VTO6",
+        limit:10
+    }),
+    success: function(response) {
+        console.log(response);
+        $('#results').text(JSON.stringify(response.data[0].product_id));
+    },
+    error: function() {
+        console.log("Critical Error");
+    }
+})
+</script>
+</html>

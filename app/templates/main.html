@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap 4 Website Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <style>
+  .fakeimg {
+    height: 200px;
+    background: #aaa;
+  }
+  </style>
+</head>
+
+<script src="https://code.jquery.com/jquery-3.4.0.min.js"
+    integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+<script>
+ $(document).ready(function() {
+
+
+  $.ajax({
+    type:'POST',
+    url:'/getranduser',
+    contentType:'application/json',
+    dataType:'json',
+    data: JSON.stringify({
+        
+        limit:5
+    }),
+    success: function(response) {
+        
+        $('#abc1').val(JSON.stringify(response.data[0].id));
+        $('#abc2').val(JSON.stringify(response.data[1].id));
+        $('#abc3').val(JSON.stringify(response.data[2].id));
+        $('#abc4').val(JSON.stringify(response.data[3].id));
+        $('#abc5').val(JSON.stringify(response.data[4].id));
+      
+       
+    },
+    error: function() {
+        console.log("Critical Error");
+    }
+})
+    $('#abc1').click(function () {
+        var url = $('#abc1').text();
+        localStorage.setItem("firstname",url);
+    });
+ 
+    $('#abc2').click(function () {
+        var url = $('#abc2').text();
+        localStorage.setItem("firstname",url);
+    });
+
+    $('#abc3').click(function () {
+        var url = $('#abc3').text();
+        localStorage.setItem("firstname",url);
+    });
+
+    $('#abc4').click(function () {
+        var url = $('#abc4').text();
+        localStorage.setItem("firstname",url);
+    });
+
+    $('#abc5').click(function () {
+        var url = $('#abc5').text();
+        localStorage.setItem("firstname",url);
+    });
+
+    $('#abc6').click(function () {
+        var url = $('#abc6').text();
+        localStorage.setItem("firstname",url);
+    });
+
+    $('#abc7').click(function () {
+        var url = $('#abc7').text();
+        localStorage.setItem("firstname",url);
+    });
+
+    $('#abc8').click(function () {
+        var url = $('#abc8').text();
+        localStorage.setItem("firstname",url);
+    });
+
+    $('#abc9').click(function () {
+        var url = $('#abc9').text();
+        localStorage.setItem("firstname",url);
+    });
+
+    $('#abc10').click(function () {
+        var url = $('#abc10').text();
+        localStorage.setItem("firstname",url);
+    });
+
+
+
+ });
+  </script>
+<body style="background-color: #a9a9a9;">
+
+<div class="jumbotron text-center" style="margin-bottom:0; background-color: #696969">
+    <h1>Recommender System</h1>
+</div>
+
+ <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-item nav-link" href="#">Features</a>
+          <a class="nav-item nav-link" href="#">Pricing</a>
+        </div>
+      </div>
+        <form class="form-inline">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </nav>
+
+<div class="container" style="margin-top:30px">
+  <div class="row">
+    <div class="col-sm-4">
+      <h3>User Activities</h3>
+      <form action="/forward/" method="post">
+      <div class="dropdown">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+              User List
+            </button>
+            <div class="dropdown-menu">
+              <li  class="dropdown-item"><button type="submit" id="abc1">A11EKRR0LDL893</button></li>
+              <li  class="dropdown-item"><button type="submit" id="abc2">A8U3FAMSJVH65</button></li>
+              <li  class="dropdown-item"><button type="submit" id="abc3">A3EERSWHAI6SO</button></li>
+              <li  class="dropdown-item"><button type="submit" id="abc4">A391EXIT5TFP72</button></li>
+              <li  class="dropdown-item"><button type="submit" id="abc5">A2WN31HANFD17K</button></li>
+            </div>
+          </div>
+          </form>
+      <h3>Product Activities</h3>
+      <form action="/forward1/" method="post">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+            Product List
+          </button>
+          <div class="dropdown-menu">
+       <ul>
+          <li  class="dropdown-item"><button type="submit" id="abc6">B00004U1J2</button></li>
+          <li  class="dropdown-item"><button type="submit" id="abc7">B00004SR9P</button></li>
+          <li  class="dropdown-item"><button type="submit" id="abc8">B00001WRHJ</button></li>
+          <li  class="dropdown-item"><button type="submit" id="abc9">B00001W0KA</button></li>
+          <li  class="dropdown-item"><button type="submit" id="abc10">B00008I8YM</button></li>
+       </ul>
+          </div>
+          </form>
+      <hr class="d-sm-none">
+    </div>
+    <div class="col-sm-8">
+      <h2>About Our Brands</h2>
+      <h5>Photos Of Our Brands.</h5>
+       <div class="bd-example">
+      <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel" style="width: 270px; ">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+          <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+          <li data-target="#carouselExampleCaptions" data-slide-to="3"></li>
+          <li data-target="#carouselExampleCaptions" data-slide-to="4"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="/static/2.png" class="d-block w-100" alt="1 Image"  style="width: 285px; height: 200px;">
+          </div>
+          <div class="carousel-item">
+            <img src="/static/3.png" class="d-block w-100" alt="..." style="width: 200px; height: 200px;" >
+          </div>
+          <div class="carousel-item">
+            <img src="/static/4.png" class="d-block w-100" alt="..." style="width: 200px; height: 200px;">
+          </div>
+          <div class="carousel-item">
+             <img src="/static/5.jpeg" class="d-block w-100" alt="..." style="width: 200px; height: 200px;">
+         </div>
+         <div class="carousel-item">
+             <img src="/static/6.jpeg" class="d-block w-100" alt="..." style="width: 200px; height: 200px;">
+         </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </div>
+      <p>Their are more companies such as Puma, Nike, UBC.Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+     
+      <br>
+      <h2>About Project</h2>
+      <h5>Description</h5>
+      <p>A recommendation system is a computer program that helps a user discover products and content by predicting the user’s rating of each item and showing them the items that they would rate highly. Recommendation systems are everywhere. If you’ve ever looked for books on Amazon or browsed through posts on Facebook, you’ve used the recommendation system without even knowing it. With online shopping, consumers have nearly infinite choices. No one has enough time to try every product for sale. Recommendation systems play an important role in helping users find products and content they care about..</p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
